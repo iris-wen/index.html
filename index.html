@@ -109,7 +109,7 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, phone, id, item, time, http] = element.data;
+          var [name, phone, id, item, time, http,] = element.data;
           var index = element.index;
           content +=
               `<tr>
@@ -131,7 +131,7 @@
     function sendQuery(data){
       $.ajax({
         type: "post",
-        url: "https://script.google.com/macros/s/AKfycbwYDtxEGzZq2y8ziVt_vX9tFojcsiexVKgBmSciybVQA6w0JNc/exec",
+        url: "https://script.google.com/macros/s/AKfycbz3fU3FVDmIQehtWX6ecKuV_A67lE64FEQ-ekmOZ_jZDyY96z0/exec",
         data: data,
         dataType: "JSON",
         success: function (response) {
