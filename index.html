@@ -108,7 +108,7 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, phone, id, item, time, http] = element.data;
+          var [name, phone, id, item, http, time] = element.data;
           var index = element.index;
           content +=
               `<tr>
