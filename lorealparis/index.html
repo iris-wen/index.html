@@ -8,7 +8,7 @@
   <title>測試</title>
   <!-- Bootstrap core CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" href="icon/love3.ico">
+  <link rel="icon" href="../icon/love3.ico">
   <!-- Custom styles for this template -->
   <style>
     body {
@@ -98,7 +98,7 @@
               var data = {
                 'name' : name,
                 'phone':phone,
-                'action': 'query'
+                'action': 'query',
                 'GSpages': 1
               }
               sendQuery(data);
@@ -129,7 +129,7 @@
     function sendQuery(data){
       $.ajax({
         type: "post",
-        url: "https://script.google.com/macros/s/AKfycbwYDtxEGzZq2y8ziVt_vX9tFojcsiexVKgBmSciybVQA6w0JNc/exec",
+        url: "https://script.google.com/macros/s/AKfycbxiMGBoV_XovuIU7TK6lcq9mbedd_gCr8AYM-x275Etl330aizV/exec",
         data: data,
         dataType: "JSON",
         success: function (response) {
