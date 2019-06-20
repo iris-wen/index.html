@@ -63,6 +63,7 @@
                 <th>帳號</th>
                 <th>訂單編號</th>
                 <th>贈品</th>
+                <th>票券密碼</th>
                 <th>使用期限</th>
               </tr>
             </thead>
@@ -108,20 +109,21 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, phone, id, item, http, time] = element.data;
+          var [name, phone, id, item, http, key,time] = element.data;
           var index = element.index;
           content +=
               `<tr>
                 <td>${name}</td>
                 <td>${id}</td>
                 <td><a href=${http} target="_blank">${item}</a></td>
+                <td>${key}</td>
                 <td>${time}</td>
               </tr>`
         });
         if (content) {
           document.getElementsByClassName('table-striped')[0].style.display = 'table'; 
         } else {
-          alert("資料錯誤");
+          alert("您輸入的資料有誤，請注意【蝦皮帳號】是您的使用者帳號，非email信箱，");
         }
         var dataView = document.getElementById('dataView');
         dataView.innerHTML = content;
