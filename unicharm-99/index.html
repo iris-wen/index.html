@@ -47,12 +47,12 @@
         <h1 class="mt-5">贈品查詢</h1>
         <h2 class="mt-5">《票券密碼》在帳號旁</h2>
         <div class="form-group col-xs-12">
-          <label for="pwd">蝦皮使用者帳號</label>
+          <label for="pwd">蝦皮使用者帳號(大小寫需相符)</label>
           <input type="text" class="form-control" id="name">
         </div>
         <div class="form-group col-xs-12">
           <label for="pwd">訂單編號</label>
-          <input type="text" class="form-control" id="idd">
+          <input type="text" class="form-control" id="phone">
         </div>
         <div class="form-group col-xs-12">
           <button type="button" id="send" class="btn btn-primary col-xs-12">送出查詢</button>
@@ -64,7 +64,7 @@
                 <th>帳號</th>
                 <th>票券密碼</th>
                 <th>贈品</th>
-                <th>有效期限</th>
+                <th>使用期限</th>
               </tr>
             </thead>
             <tbody id="dataView">
@@ -83,7 +83,7 @@
         $('#send').click(function(e){
             var status = true;
             var name = $('#name').val();
-            var idd = $('#idd').val();   
+            var phone = $('#phone').val();   
             $('input').focus(function(){
               $(this).css('border','');
             });
@@ -91,14 +91,14 @@
               $('#name').css('border','1px solid #ff0000');
               status = false;
             }
-            if(idd == ''){
-              $('#idd').css('border','1px solid #ff0000');
+            if(phone == ''){
+              $('#phone').css('border','1px solid #ff0000');
               status = false;
             }
             if(status){
               var data = {
                 'name' : name,
-                'idd':idd,
+                'phone':phone,
                 'action': 'query',
                 'GSpages': 0
               }
@@ -109,7 +109,7 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, phone, idd, item, http, key,time] = element.data;
+          var [name, id, phone, item, http, key,time] = element.data;
           var index = element.index;
           content +=
               `<tr>
@@ -136,7 +136,7 @@
         success: function (response) {
           handleData(response);
           $('#name').val('') 
-          $('#idd').val('') 
+          $('#phone').val('') 
         }
       });
     }
