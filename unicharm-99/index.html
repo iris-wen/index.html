@@ -51,7 +51,7 @@
           <input type="text" class="form-control" id="name">
         </div>
         <div class="form-group col-xs-12">
-          <label for="pwd">收件電話後3碼(請確認訂單的聯絡電話)</label>
+          <label for="pwd">訂單編號</label>
           <input type="text" class="form-control" id="phone">
         </div>
         <div class="form-group col-xs-12">
@@ -64,8 +64,7 @@
                 <th>帳號</th>
                 <th>票券密碼</th>
                 <th>贈品</th>
-                <th>訂單編號</th>
-                <th>使用期限</th>
+                <th>有效期限</th>
               </tr>
             </thead>
             <tbody id="dataView">
@@ -84,7 +83,7 @@
         $('#send').click(function(e){
             var status = true;
             var name = $('#name').val();
-            var phone = $('#phone').val();   
+            var id = $('#id').val();   
             $('input').focus(function(){
               $(this).css('border','');
             });
@@ -92,14 +91,14 @@
               $('#name').css('border','1px solid #ff0000');
               status = false;
             }
-            if(phone == ''){
-              $('#phone').css('border','1px solid #ff0000');
+            if(id == ''){
+              $('#id').css('border','1px solid #ff0000');
               status = false;
             }
             if(status){
               var data = {
                 'name' : name,
-                'phone':phone,
+                'id':id,
                 'action': 'query',
                 'GSpages': 0
               }
@@ -117,7 +116,6 @@
                 <td>${name}</td>
                 <td>${key}</td>
                 <td><a href=${http} target="_blank">${item}</a></td>
-                <td>${id}</td>
                 <td>${time}</td>
               </tr>`
         });
@@ -137,7 +135,7 @@
         dataType: "JSON",
         success: function (response) {
           handleData(response);
-          $('#phone').val('') 
+          $('#id').val('') 
         }
       });
     }
