@@ -47,12 +47,12 @@
         <h1 class="mt-5">贈品查詢</h1>
         <h2 class="mt-5">《票券密碼》在帳號旁</h2>
         <div class="form-group col-xs-12">
-          <label for="pwd">蝦皮使用者帳號(大小寫需相同)</label>
+          <label for="pwd">蝦皮使用者帳號</label>
           <input type="text" class="form-control" id="name">
         </div>
         <div class="form-group col-xs-12">
           <label for="pwd">訂單編號</label>
-          <input type="text" class="form-control" id="ID">
+          <input type="text" class="form-control" id="idd">
         </div>
         <div class="form-group col-xs-12">
           <button type="button" id="send" class="btn btn-primary col-xs-12">送出查詢</button>
@@ -83,7 +83,7 @@
         $('#send').click(function(e){
             var status = true;
             var name = $('#name').val();
-            var ID = $('#ID').val();   
+            var idd = $('#idd').val();   
             $('input').focus(function(){
               $(this).css('border','');
             });
@@ -91,14 +91,14 @@
               $('#name').css('border','1px solid #ff0000');
               status = false;
             }
-            if(ID == ''){
-              $('#ID').css('border','1px solid #ff0000');
+            if(idd == ''){
+              $('#idd').css('border','1px solid #ff0000');
               status = false;
             }
             if(status){
               var data = {
                 'name' : name,
-                'ID':ID,
+                'idd':idd,
                 'action': 'query',
                 'GSpages': 0
               }
@@ -109,7 +109,7 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, phone, ID, item, http, key,time] = element.data;
+          var [name, phone, idd, item, http, key,time] = element.data;
           var index = element.index;
           content +=
               `<tr>
@@ -135,7 +135,8 @@
         dataType: "JSON",
         success: function (response) {
           handleData(response);
-          $('#ID').val('') 
+          $('#name').val('') 
+          $('#idd').val('') 
         }
       });
     }
