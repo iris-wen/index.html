@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>缺貨確認</title>
+  <title>查詢票券</title>
   <!-- Bootstrap core CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" href="../icon/ghost.ico">
+  <link rel="icon" href="../icon/love3.ico">
   <!-- Custom styles for this template -->
   <style>
     body {
@@ -44,10 +44,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">缺貨查詢</h1>
+        <h1 class="mt-5">😊😊😊</h1>
         <div class="form-group col-xs-12">
           <label for="pwd">訂單編號</label>
-          <input type="text" class="form-control" id="order">
+          <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group col-xs-12">
         </div>
         <div class="form-group col-xs-12">
           <button type="button" id="send" class="btn btn-primary col-xs-12">送出查詢</button>
@@ -56,7 +58,7 @@
           <table class="table table-striped" style="display: none;">
             <thead>
               <tr>
-                <th>更新日期</th>
+                <th>更新日</th>
                 <th>貨號</th>
                 <th>品名</th>
                 <th>狀態</th>
@@ -66,6 +68,7 @@
             </tbody>
           </table>
         </div>
+        <div class="col-xs-12 text-center"><a href="https://shopee.tw/" target="_blank">若有問題，請至蝦皮聊聊詢問客服</a></div>
       </div>
     </div>
   </div>
@@ -76,17 +79,17 @@
     $(function(){
         $('#send').click(function(e){
             var status = true;
-            var order = $('#order').val();   
+            var name = $('#name').val();  
             $('input').focus(function(){
               $(this).css('border','');
             });
-            if(order == ''){
-              $('#order').css('border','1px solid #ff0000');
+            if(name == ''){
+              $('#name').css('border','1px solid #ff0000');
               status = false;
             }
             if(status){
               var data = {
-                'order':order,
+                'name' : name,
                 'action': 'query',
                 'GSpages': 4
               }
@@ -97,20 +100,20 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [date, order, id, item, inform] = element.data;
+          var [name, id, phone, item, http, key,time] = element.data;
           var index = element.index;
           content +=
               `<tr>
-                <td>${date}</td>
-                <td>${id}</td>
+                <td>${name}</td>
+                <td>${key}</td>
                 <td>${item}</td>
-                <td>${inform}</td>
+                <td>${time}</td>
               </tr>`
         });
         if (content) {
           document.getElementsByClassName('table-striped')[0].style.display = 'table'; 
         } else {
-          alert("查無訂單，是在哈囉？");
+          alert("查無資料，是在哈囉?");
         }
         var dataView = document.getElementById('dataView');
         dataView.innerHTML = content;
@@ -123,7 +126,7 @@
         dataType: "JSON",
         success: function (response) {
           handleData(response);
-          $('#order').val('') 
+          $('#name').val('') 
         }
       });
     }
