@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>缺貨確認</title>
+  <title>查詢缺貨</title>
   <!-- Bootstrap core CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" href="../icon/ghost.ico">
+  <link rel="icon" href="../icon/love3.ico">
   <!-- Custom styles for this template -->
   <style>
     body {
@@ -44,10 +44,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">😊😊😊</h1>
+        <h1 class="mt-5">😊😊💖</h1>
         <div class="form-group col-xs-12">
-          <label for="pwd">訂單編號</label>
-          <input type="text" class="form-control" id="phone">
+          <label for="pwd">蝦皮使用者帳號</label>
+          <input type="text" class="form-control" id="name">
         </div>
         <div class="form-group col-xs-12">
           <button type="button" id="send" class="btn btn-primary col-xs-12">送出查詢</button>
@@ -76,17 +76,17 @@
     $(function(){
         $('#send').click(function(e){
             var status = true;
-            var phone = $('#phone').val();   
+            var name = $('#name').val();  
             $('input').focus(function(){
               $(this).css('border','');
             });
-            if(phone == ''){
-              $('#phone').css('border','1px solid #ff0000');
+            if(name == ''){
+              $('#name').css('border','1px solid #ff0000');
               status = false;
             }
             if(status){
               var data = {
-                'phone':phone,
+                'name' : name,
                 'action': 'query',
                 'GSpages': 4
               }
@@ -97,20 +97,20 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [phone,date,id,item,state] = element.data;
+          var [order,date,id,item,staus] = element.data;
           var index = element.index;
           content +=
               `<tr>
-                <td>${id}</td>
+                <td>${date}</td>
                 <td>${id}</td>
                 <td>${item}</td>
-                <td>${state}</td>
+                <td>${staus}</td>
               </tr>`
         });
         if (content) {
           document.getElementsByClassName('table-striped')[0].style.display = 'table'; 
         } else {
-          alert("查無資料2");
+          alert("查無資料");
         }
         var dataView = document.getElementById('dataView');
         dataView.innerHTML = content;
@@ -123,7 +123,6 @@
         dataType: "JSON",
         success: function (response) {
           handleData(response);
-          $('#phone').val('') 
         }
       });
     }
