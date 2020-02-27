@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>查詢票券</title>
+  <title>訂單缺貨確認</title>
   <!-- Bootstrap core CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" href="../icon/love3.ico">
+  <link rel="icon" href="../icon/ghost.ico">
   <!-- Custom styles for this template -->
   <style>
     body {
@@ -44,14 +44,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">贈品查詢</h1>
-        <h2 class="mt-5">《票券密碼》在帳號旁</h2>
+        <h1 class="mt-5">缺貨查詢</h1>
         <div class="form-group col-xs-12">
-          <label for="pwd">蝦皮使用者帳號(大小寫需相符)</label>
-          <input type="text" class="form-control" id="name">
-        </div>
-        <div class="form-group col-xs-12">
-          <label for="pwd">收件電話後3碼(請確認訂單的聯絡電話)</label>
+          <label for="pwd">訂單編號</label>
           <input type="text" class="form-control" id="phone">
         </div>
         <div class="form-group col-xs-12">
@@ -61,18 +56,16 @@
           <table class="table table-striped" style="display: none;">
             <thead>
               <tr>
-                <th>帳號</th>
-                <th>票券密碼</th>
-                <th>贈品</th>
-                <th>訂單編號</th>
-                <th>使用期限</th>
+                <th>更新日期</th>
+                <th>貨號</th>
+                <th>品名</th>
+                <th>狀態</th>
               </tr>
             </thead>
             <tbody id="dataView">
             </tbody>
           </table>
         </div>
-        <div class="col-xs-12 text-center"><a href="https://shopee.tw/" target="_blank">若有問題，請至蝦皮聊聊詢問客服</a></div>
       </div>
     </div>
   </div>
@@ -83,25 +76,19 @@
     $(function(){
         $('#send').click(function(e){
             var status = true;
-            var name = $('#name').val();
             var phone = $('#phone').val();   
             $('input').focus(function(){
               $(this).css('border','');
             });
-            if(name == ''){
-              $('#name').css('border','1px solid #ff0000');
-              status = false;
-            }
             if(phone == ''){
               $('#phone').css('border','1px solid #ff0000');
               status = false;
             }
             if(status){
               var data = {
-                'name' : name,
                 'phone':phone,
                 'action': 'query',
-                'GSpages': 1
+                'GSpages': 4
               }
               sendQuery(data);
             }
@@ -110,21 +97,20 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, phone, id, item, http, key,time] = element.data;
+          var [date, order, id, item, inform] = element.data;
           var index = element.index;
           content +=
               `<tr>
-                <td>${name}</td>
-                <td>${key}</td>
-                <td><a href=${http} target="_blank">${item}</a></td>
+                <td>${date}</td>
                 <td>${id}</td>
-                <td>${time}</td>
+                <td>${item}</td>
+                <td>${inform}</td>
               </tr>`
         });
         if (content) {
           document.getElementsByClassName('table-striped')[0].style.display = 'table'; 
         } else {
-          alert("您輸入的資料有誤，請注意【蝦皮帳號】是您的使用者帳號，非email信箱，");
+          alert("查無訂單，是在哈囉？");
         }
         var dataView = document.getElementById('dataView');
         dataView.innerHTML = content;
