@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>訂單缺貨確認</title>
+  <title>缺貨確認</title>
   <!-- Bootstrap core CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <link rel="icon" href="../icon/ghost.ico">
@@ -47,7 +47,7 @@
         <h1 class="mt-5">缺貨查詢</h1>
         <div class="form-group col-xs-12">
           <label for="pwd">訂單編號</label>
-          <input type="text" class="form-control" id="phone">
+          <input type="text" class="form-control" id="order">
         </div>
         <div class="form-group col-xs-12">
           <button type="button" id="send" class="btn btn-primary col-xs-12">送出查詢</button>
@@ -76,17 +76,17 @@
     $(function(){
         $('#send').click(function(e){
             var status = true;
-            var phone = $('#phone').val();   
+            var order = $('#order').val();   
             $('input').focus(function(){
               $(this).css('border','');
             });
-            if(phone == ''){
-              $('#phone').css('border','1px solid #ff0000');
+            if(order == ''){
+              $('#order').css('border','1px solid #ff0000');
               status = false;
             }
             if(status){
               var data = {
-                'phone':phone,
+                'order':order,
                 'action': 'query',
                 'GSpages': 4
               }
@@ -123,7 +123,7 @@
         dataType: "JSON",
         success: function (response) {
           handleData(response);
-          $('#phone').val('') 
+          $('#order').val('') 
         }
       });
     }
