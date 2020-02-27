@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>查詢票券</title>
+  <title>查詢缺貨</title>
   <!-- Bootstrap core CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" href="../icon/love3.ico">
+  <link rel="icon" href="../icon/ghost.ico">
   <!-- Custom styles for this template -->
   <style>
     body {
@@ -100,7 +100,7 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, id, phone, item, http, key,time] = element.data;
+          var [name, item, http, key,time] = element.data;
           var index = element.index;
           content +=
               `<tr>
