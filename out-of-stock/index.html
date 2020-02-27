@@ -101,7 +101,7 @@
           var index = element.index;
           content +=
               `<tr>
-                <td>${date}</td>
+                <td>${id}</td>
                 <td>${id}</td>
                 <td>${item}</td>
                 <td>${state}</td>
@@ -110,7 +110,7 @@
         if (content) {
           document.getElementsByClassName('table-striped')[0].style.display = 'table'; 
         } else {
-          alert("查無資料");
+          alert("查無資料2");
         }
         var dataView = document.getElementById('dataView');
         dataView.innerHTML = content;
