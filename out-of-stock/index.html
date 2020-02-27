@@ -70,7 +70,6 @@
             </tbody>
           </table>
         </div>
-        <div class="col-xs-12 text-center"><a href="https://shopee.tw/" target="_blank">若有問題，請至蝦皮聊聊詢問客服</a></div>
       </div>
     </div>
   </div>
@@ -108,14 +107,14 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, id, phone, item, http, key,time] = element.data;
+          var [name, id, phone, item, key] = element.data;
           var index = element.index;
           content +=
               `<tr>
                 <td>${name}</td>
                 <td>${key}</td>
-                <td><a href=${http} target="_blank">${item}</a></td>
-                <td>${time}</td>
+                <td>${item}</td>
+                <td>${id}</td>
               </tr>`
         });
         if (content) {
