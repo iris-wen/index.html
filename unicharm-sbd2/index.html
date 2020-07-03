@@ -64,7 +64,6 @@
                 <th>帳號</th>
                 <th>票券密碼</th>
                 <th>贈品</th>
-                <th>訂單編號</th>
                 <th>使用期限</th>
               </tr>
             </thead>
@@ -101,7 +100,7 @@
                 'name' : name,
                 'phone':phone,
                 'action': 'query',
-                'GSpages': 4
+                'GSpages': 4,
               }
               sendQuery(data);
             }
@@ -110,14 +109,13 @@
     function handleData(response){
         var content = '';
         response.forEach(element => {
-          var [name, phone, id, item, http, key,time] = element.data;
+          var [name, id, phone, item, http, key,time] = element.data;
           var index = element.index;
           content +=
               `<tr>
                 <td>${name}</td>
                 <td>${key}</td>
                 <td><a href=${http} target="_blank">${item}</a></td>
-                <td>${id}</td>
                 <td>${time}</td>
               </tr>`
         });
