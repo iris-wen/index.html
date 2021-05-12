@@ -100,7 +100,7 @@
                 'name' : name,
                 'phone':phone,
                 'action': 'query',
-                'gspages': 1
+                'GSpages': 1
               }
               sendQuery(data);
             }
@@ -130,7 +130,7 @@
     function sendQuery(data){
       $.ajax({
         type: "post",
-        url: "https://script.google.com/macros/s/AKfycbxjpK8J38qWd6lmMfQtrBVSOkLhx3WZb1ydozutUcriVMEM4wVKzHjynnoIZ6I_9JvwOA/exec",
+        url: "https://script.google.com/macros/s/AKfycbzczO8YV0geeHc6Yxi23k-gSxfvxbjdpZ1eo-NGiFOz74i9thcc1pS7OeZq8JmY6W3I1Q/exec",
         data: data,
         dataType: "JSON",
         success: function (response) {
